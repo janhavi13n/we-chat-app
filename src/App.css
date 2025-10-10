@@ -1,38 +1,233 @@
-.App {
-  text-align: center;
+:root {
+    --bg-color: #f4f6f8;
+    --sidebar-bg: white;
+    --chat-bg: white;
+    --button-bg: #101086;
+    --button-hover: #357abd;
+    --text-color: black;
+    --friend-msg-bg: #ccccff70;
+    --mine-msg-bg: #aeaeff;
+    --border-color: #e0e0e0;
+    overflow-y: hidden;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body.dark-theme {
+    --bg-color: #18191a;
+    --sidebar-bg: #242526;
+    --chat-bg: #242526;
+    --button-bg: #101086;
+    --button-hover: #357abd;
+    --text-color: white;
+    --friend-msg-bg: #3a3b3c;
+    --mine-msg-bg: #4646a3;
+    --border-color: #3a3b3c;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* General styling */
+body {
+    font-family: Arial, sans-serif;
+    background: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
-.App-link {
-  color: #61dafb;
+.signin-btn,
+.signout-btn {
+    background: var(--button-bg);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 0;
+    font-weight: 600;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.infolabel {
+    color: var(--button-bg);
+    font-size: 16px;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+
+/* Chat Layout */
+.chat-container {
+    display: flex;
+    flex: 1;
+    height: calc(90vh - 100px);
+    padding: 10px 20px;
+    gap: 20px;
+}
+
+/* Sidebar (Friends List + Add Friend) */
+.sidebar {
+    flex: 0 0 30%;
+    background: var(--sidebar-bg);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+/* Chat Room */
+.chatRoom {
+    width: 100%;
+    background: var(--chat-bg);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+.chat-room {
+    background: var(--chat-bg);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Inputs and Buttons */
+button {
+    background: var(--button-bg);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.sidebar input {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 94%;
+}
+
+/* Friends List */
+.friends-list h3 {
+    margin-bottom: 5px;
+}
+
+/* Messages */
+.messages {
+    flex: 1;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: var(--chat-bg);
+    display: flex;
+    flex-direction: column;
+    min-height: 100px;
+    margin-top: 15px;
+}
+
+.message {
+    margin-bottom: 8px;
+    max-width: 65%;
+    padding: 8px 12px;
+    border-radius: 8px;
+    word-wrap: break-word;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.message strong {
+    font-size: 13px;
+}
+
+.message.mine {
+    align-self: flex-end;
+    background: var(--mine-msg-bg);
+}
+
+.message.friend {
+    align-self: flex-start;
+    background: var(--friend-msg-bg);
+}
+
+.timestamp {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 11px;
+}
+
+.message-text {
+    font-size: 12px;
+}
+
+.chat-room input {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 90vw;
+}
+
+.friendInfo {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.friendInfo label {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.sendBtn {
+    padding: 5px 5px 0;
+    margin-top: 0;
+}
+
+.friendList {
+    display: flex;
+    align-items: center;
+    background: var(--friend-msg-bg) !important;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    padding: 8px;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.friendList:hover {
+    background: var(--mine-msg-bg) !important;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .chat-container {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .chatRoom {
+        width: auto;
+    }
 }

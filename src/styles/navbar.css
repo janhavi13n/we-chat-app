@@ -1,0 +1,52 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: var(--sidebar-bg);
+    color: var(--text-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-left h2 {
+    margin: 0;
+}
+
+.navbar-right {
+    display: flex;
+    gap: 10px;
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--text-color);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 1em;
+}
+
+.navbarRight {
+    display: flex;
+    align-items: flex-end;
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-details .username {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.user-details .useremail {
+    font-size: 12px;
+}
