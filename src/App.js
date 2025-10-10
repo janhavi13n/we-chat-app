@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import "./App.css";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import { Navbar } from "./components/Navbar";
@@ -7,6 +6,7 @@ import { AddFriend } from "./components/AddFriend";
 import { FriendsList } from "./components/FriendsList";
 import { ChatRoom } from "./components/ChatRoom";
 import SignInPage from "./components/SignInPage";
+import "./App.css";
 
 function App() {
     const [selectedFriend, setSelectedFriend] = useState(null);

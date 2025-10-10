@@ -38,6 +38,16 @@ body {
     height: 100vh;
 }
 
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: var(--sidebar-bg);
+    color: var(--text-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .signin-btn,
 .signout-btn {
     background: var(--button-bg);
@@ -48,6 +58,15 @@ body {
     cursor: pointer;
     margin-top: 0;
     font-weight: 600;
+}
+
+.user-details .username {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.user-details .useremail {
+    font-size: 12px;
 }
 
 .infolabel {
@@ -219,9 +238,35 @@ button {
     background: var(--mine-msg-bg) !important;
 }
 
-
-/* Responsive Design */
 @media (max-width: 768px) {
+    .navbar {
+        padding: 10px 10px;
+    }
+
+    .navbarRight {
+        flex-direction: column-reverse;
+        gap: 5px;
+    }
+
+    .user-details .username {
+        font-size: 12px;
+    }
+
+    .user-details .useremail {
+        font-size: 10px;
+    }
+
+    .friends-list h3,
+    .message strong,
+    .friendInfo label {
+        font-size: 12px;
+    }
+
+    .user-avatar {
+        width: 20px;
+        height: 20px;
+    }
+
     .chat-container {
         flex-direction: column;
         padding: 10px;

@@ -127,8 +127,8 @@ Redeploy after changes
 
 Whenever you make new updates:
 
-npm run build
-firebase deploy
+ => npm run build
+ => firebase deploy
 
 Common Mistakes to Avoid
 

@@ -1,12 +1,4 @@
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background: var(--sidebar-bg);
-    color: var(--text-color);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+
 
 .navbar-left h2 {
     margin: 0;
@@ -40,13 +32,4 @@
 .user-details {
     display: flex;
     flex-direction: column;
-}
-
-.user-details .username {
-    font-size: 14px;
-    font-weight: 700;
-}
-
-.user-details .useremail {
-    font-size: 12px;
 }
