@@ -3,6 +3,7 @@ import { db, auth } from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import Loader from "./Loader";
+import { UserDetails } from "./UserDetails";
 
 export const FriendsList = ({ selectChat }) => {
     const [loading, setLoading] = useState(true);
@@ -17,6 +18,7 @@ export const FriendsList = ({ selectChat }) => {
             for (let fid of friendIds) {
                 const fDoc = await getDoc(doc(db, "users", fid));
                 if (fDoc.exists()) {
+                    console.log("url", fDoc.data().photoURL);
                     friendData.push({
                         uid: fid,
                         name: fDoc.data().name,
@@ -28,7 +30,7 @@ export const FriendsList = ({ selectChat }) => {
             setFriends(friendData);
             setLoading(false);
         } else {
-            setLoading(false)
+            setLoading(false);
         }
     };
 
@@ -38,7 +40,6 @@ export const FriendsList = ({ selectChat }) => {
         });
         return unsubscribe;
     }, []);
-
 
     return (
         <div className="friends-list">
@@ -51,18 +52,18 @@ export const FriendsList = ({ selectChat }) => {
                 <div>
                     {friends?.map((friend) => (
                         <div
-                            key={friend.uid}
                             className="friendList"
                             onClick={() => selectChat(friend.uid)}
                         >
-                            <img src={friend.photoURL} alt="Friend" className="user-avatar" />
-                            {friend.name}
+                            <UserDetails
+                                user={friend}
+                                selectChat={selectChat}
+                                showEmail={false}
+                            />
                         </div>
                     ))}
                 </div>
             )}
-
-
         </div>
     );
 };

@@ -11,6 +11,7 @@ import {
 } from "firebase/firestore";
 import { MessageInput } from "./MessageInput";
 import Loader from "./Loader";
+import { UserDetails } from "./UserDetails";
 
 export const ChatRoom = ({ friendUid }) => {
     const [loading, setLoading] = useState(true);
@@ -45,7 +46,10 @@ export const ChatRoom = ({ friendUid }) => {
                 });
             }
 
-            const q = query(collection(db, "chats", id, "messages"), orderBy("createdAt"));
+            const q = query(
+                collection(db, "chats", id, "messages"),
+                orderBy("createdAt")
+            );
 
             const unsubscribe = onSnapshot(q, (snapshot) => {
                 setMessages(snapshot.docs.map((doc) => doc.data()));
@@ -60,38 +64,45 @@ export const ChatRoom = ({ friendUid }) => {
 
     return (
         <div className="chat-room">
-            {friendInfo.name !== "" && 
-            <div className="friendInfo">
-                <img
-                    src={friendInfo.photoURL}
-                    alt="Friend"
-                    className="user-avatar"
-                />
-                <label>
-                    {friendInfo.name} ({friendInfo.email})
-                </label>
-            </div>}
+            {friendInfo.name !== "" && (
+                <UserDetails user={friendInfo} showEmail={true} />
+            )}
 
             <div className="messages">
                 {loading ? (
                     <Loader />
-                ) : messages.length === 0 ?
-                    (<label className="infolabel">No messages yet. Say hi 👋</label>) :
-                    (messages.map((msg, index) => (
-                        <div
-                            key={index}
-                            className={`message ${msg.uid === auth.currentUser.uid ? "mine" : "friend"
+                ) : messages.length === 0 ? (
+                    <label className="infolabel">
+                        No messages yet. Say hi 👋
+                    </label>
+                ) : (
+                    <>
+                        {messages.map((msg, index) => (
+                            <div
+                                key={index}
+                                className={`message ${
+                                    msg.uid === auth.currentUser.uid
+                                        ? "mine"
+                                        : "friend"
                                 }`}
-                        >
-                            <strong>{msg.name}</strong>
-                            <span className="message-text">{msg.text}</span>
-                            {msg.createdAt && (
-                                <span className="timestamp">
-                                    {msg.createdAt.toDate().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                                </span>
-                            )}
-                        </div>
-                    )))}
+                            >
+                                <strong>{msg.name}</strong>
+                                <span className="message-text">{msg.text}</span>
+                                {msg.createdAt && (
+                                    <span className="timestamp">
+                                        {msg.createdAt
+                                            .toDate()
+                                            .toLocaleTimeString([], {
+                                                hour: "2-digit",
+                                                minute: "2-digit",
+                                            })}
+                                    </span>
+                                )}
+                            </div>
+                        ))}
+                        <div id="bottomAnchor"></div>
+                    </>
+                )}
             </div>
 
             <MessageInput chatId={chatId} />

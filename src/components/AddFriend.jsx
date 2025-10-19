@@ -4,6 +4,7 @@ import { doc, updateDoc, arrayUnion, getDocs, collection, query, where } from "f
 
 export const AddFriend = ({ refreshFriends }) => {
     const [friendEmail, setFriendEmail] = useState("");
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     const handleAddFriend = async () => {
         if (!friendEmail) {
@@ -22,10 +23,15 @@ export const AddFriend = ({ refreshFriends }) => {
             const q = query(usersRef, where("email", "==", friendEmail.toLowerCase()));
             const querySnapshot = await getDocs(q);
 
-            console.log("Query results:", querySnapshot.docs.map(doc => doc.data()));
+            if(!emailRegex.test(friendEmail)) {
+                alert("Please enter a valid email address");
+                setFriendEmail("");
+                return;
+            }
 
             if (querySnapshot.empty) {
-                alert("User not found");
+                alert("User not found, please ask your friend to login first");
+                setFriendEmail("");
                 return;
             }
 
@@ -34,6 +40,7 @@ export const AddFriend = ({ refreshFriends }) => {
             // Prevent adding self
             if (friendUid === user.uid) {
                 alert("You cannot add yourself");
+                setFriendEmail("");
                 return;
             }
 

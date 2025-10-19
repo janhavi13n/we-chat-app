@@ -5,6 +5,17 @@ import sendIcon from "../assets/send.svg";
 
 export const MessageInput = ({ chatId }) => {
     const [newMsg, setNewMsg] = useState("");
+    
+    const handleEnterKeyPress = (e) => {
+        if (e.key === 'Enter' && newMsg.trim() !== "") {
+            sendMessage();
+        }
+    };
+
+    function scrollToBottom() {
+        var anchor = document.getElementById("bottomAnchor");
+        anchor.scrollIntoView({ block: "end" });
+    }
 
     const sendMessage = async () => {
         if (newMsg.trim() === "" || !chatId) return;
@@ -15,7 +26,7 @@ export const MessageInput = ({ chatId }) => {
             uid: auth.currentUser.uid,
             name: auth.currentUser.displayName,
         });
-
+        scrollToBottom();
         setNewMsg("");
     };
 
@@ -24,6 +35,7 @@ export const MessageInput = ({ chatId }) => {
             <input
                 value={newMsg}
                 onChange={(e) => setNewMsg(e.target.value)}
+                onKeyDown={handleEnterKeyPress}
                 placeholder="Type your message..."
             />
             <button className="sendBtn" onClick={sendMessage}>
