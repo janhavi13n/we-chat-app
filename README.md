@@ -50,18 +50,19 @@ Run:
 After a few seconds, we'll see a URL like:
 
 Project Console: https://console.firebase.google.com/project/my-chat-app-4b43e/overview
+
 Hosting URL: https://my-chat-app-4b43e.web.app
 
-
-That’s our live deployed chat app 🎉
+That’s our live deployed chat app
 
 
 ### Re - Deployment
+
 Whenever you make new updates:
 ### `npm run build`
 ### `firebase deploy`
 
 Common Mistakes to Avoid
-1. Don’t deploy npm start — always deploy after npm run build.
+1. Don’t deploy npm start- always deploy after npm run build.
 2. Ensure your firebase.json has "public": "build".
 3. Don’t delete the firebase.json or .firebaserc files.
